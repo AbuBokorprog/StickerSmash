@@ -21,6 +21,13 @@ export default function Index() {
   >(undefined);
 
   const pickImageAsync = async () => {
+    const permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (permissionResult.status !== 'granted') {
+      alert('Permission to access media library is required!');
+      return;
+    }
+
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       allowsEditing: true,
@@ -41,6 +48,7 @@ export default function Index() {
 
   const onAddSticker = () => {
     // we will implement this later
+    setIsModalVisible(true);
   };
 
   const onSaveImageAsync = async () => {
